@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <!-- Content-Security-Policy (M-12): for a key-holding offline signer the priority is preventing
+       any injected/XSS script from exfiltrating secrets. connect-src 'self' blocks all off-origin
+       fetch/XHR/WebSocket beaconing; default-src 'self' blocks external script/resource loads.
+       ('unsafe-inline' scripts are still permitted for the bundled inline bootstrap shim; tighten
+       to nonces/hashes when that shim is externalised.)
+       TODO(security): remove 'unsafe-inline' from script-src by externalising the bootstrap shim
+       below (window.global/process) and serving a per-build nonce or hash. Residual risk is low
+       because connect-src 'self' blocks exfiltration and there is no attacker-controlled innerHTML
+       sink; not tightened now to avoid breaking the inline bootstrap. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'">
+  <title>Locker Vault - Wallet air-gap ERC-20 | Locker Protocol</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Wallet ERC-20 air-gap vault. Sign transactions offline with hardware-grade security. 100% free and open-source PWA. No internet required.">
+  <meta name="keywords" content="Locker Protocol, air-gapped wallet, offline signing, PWA, crypto wallet, cold storage, hardware security, open-source, DeFi, Ethereum">
+  <meta name="author" content="Locker Protocol">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://lockerprotocol.com/vault">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#7c3aed">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Locker Vault">
+
+  <!-- Open Graph / Facebook / Discord / Telegram -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ERC-20 Locker Protocol">
+  <meta property="og:title" content="Locker Vault - Wallet air-gap ERC-20 | Locker Protocol">
+  <meta property="og:description" content="Sign transactions offline with hardware-grade security. 100% free and open-source air-gapped wallet PWA. No app store needed.">
+  <meta property="og:url" content="https://lockerprotocol.com/vault">
+  <meta property="og:image" content="https://lockerprotocol.com/vault/assets/image/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Locker Vault - Wallet air-gap ERC-20 | Locker Protocol">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Locker Vault - Wallet air-gap ERC-20 | Locker Protocol">
+  <meta name="twitter:description" content="Sign transactions offline with hardware-grade security. 100% free and open-source air-gapped wallet PWA. No app store needed.">
+  <meta name="twitter:image" content="https://lockerprotocol.com/vault/assets/image/og-cover.png">
+  <meta name="twitter:image:alt" content="Locker Vault - Wallet air-gap ERC-20 | Locker Protocol">
+
+  <!-- Structured Data: WebSite (tells Google the site name instead of showing domain) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "ERC-20 Locker Protocol",
+    "alternateName": ["Locker Protocol", "Locker", "LockerProtocol"],
+    "url": "https://lockerprotocol.com/vault",
+    "description": "Wallet ERC-20 air-gap vault. Sign transactions offline with hardware-grade security.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Locker Protocol",
+      "url": "https://lockerprotocol.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://lockerprotocol.com/vault/assets/icons/icon-512x512.png"
+      }
+    }
+  }
+  </script>
+
+  <style>
+    /* Global Splash Screen Pre-Loader CSS */
+    .global-splash-screen {
+      position: fixed; inset: 0; background: #ffffff;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 99999;
+    }
+    .splash-spinner-container {
+      position: relative; width: 120px; height: 120px; display: flex; align-items: center; justify-content: center;
+    }
+    .splash-logo {
+      width: 60px; height: auto; position: absolute; z-index: 10;
+    }
+    .splash-ring {
+      position: absolute; width: 100%; height: 100%; border-radius: 50%;
+      border: 4px solid #f3f4f6; border-top-color: #7c3aed; border-right-color: #3b82f6;
+      animation: variable-spin 2.5s cubic-bezier(0.68, -0.15, 0.265, 1.15) infinite;
+    }
+    @keyframes variable-spin {
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(360deg); animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1); }
+      100% { transform: rotate(720deg); }
+    }
+  </style>
+<link rel="stylesheet" href="styles-RMABT56U.css"><link rel="modulepreload" href="chunk-TJECETNS.js"><link rel="modulepreload" href="chunk-5MPHXADD.js"><link rel="modulepreload" href="chunk-ZEHXKRI4.js"></head>
+
+<body>
+  <script>
+    window.global = window;
+    window.process = { env: { DEBUG: undefined }, browser: true, version: '' };
+  </script>
+  <app-root>
+    <div class="global-splash-screen" aria-label="Loading Application">
+      <div class="splash-spinner-container">
+        <!-- Spinning Ring -->
+        <div class="splash-ring"></div>
+        <!-- Static Logo Center (inline SVG: no request, renders regardless of <base href="/">
+             while the app is served under /vault/ - an <img src> here 404s and left a blank splash) -->
+        <svg class="splash-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-label="Locker Logo">
+          <path d="M 35 15 H 15 V 35 M 65 15 H 85 V 35 M 35 85 H 15 V 65 M 65 85 H 85 V 65" fill="none" stroke="#1E293B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 35 15 H 15 V 35 M 65 15" fill="none" stroke="#9900CC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 65 85 H 85 V 65" fill="none" stroke="#9900CC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 30 30 V 69" fill="none" stroke="#1E293B" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 40 22 V 78" fill="none" stroke="#9900CC" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 50 22 V 78" fill="none" stroke="#1E293B" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 60 22 V 78" fill="none" stroke="#9900CC" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 70 30 V 69" fill="none" stroke="#1E293B" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </app-root>
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
+<script src="polyfills-LYREBB6B.js" type="module"></script><script src="main-ZJTQPQLU.js" type="module"></script></body>
+
+</html>
