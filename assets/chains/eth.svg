@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <rect width="24" height="24" rx="5" fill="#627EEA"/>
+  <g fill="#fff">
+    <path fill-opacity=".602" d="M12.128 3v6.652l5.623 2.513z"/>
+    <path d="M12.128 3 6.503 12.165l5.625-2.513z"/>
+    <path fill-opacity=".602" d="M12.128 16.478v4.518l5.627-7.784z"/>
+    <path d="M12.128 20.996v-4.52L6.503 13.214z"/>
+    <path fill-opacity=".2" d="m12.128 15.43 5.623-3.264-5.623-2.512z"/>
+    <path fill-opacity=".602" d="m6.503 12.166 5.625 3.264V9.654z"/>
+  </g>
+</svg>
