@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!-- Shown by the Android app instead of the vault when the phone's Android System
+     WebView is older than android.minWebViewVersion (capacitor.config.ts): an
+     air-gapped phone never updates it, and the vault would stay on a blank page
+     (native-apps review NA-01, 2026-09-25). This page must work where the app
+     cannot: plain HTML, ES5 only, no external resource. Pinned by
+     scripts/legacy-webview.test.mjs. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Locker Vault</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #f5f3ff; color: #1f2937; }
+  body { font-family: -apple-system, "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif; font-size: 16px; line-height: 1.5; }
+  main { max-width: 32rem; margin: 0 auto; padding: 2rem 1.25rem; }
+  .card { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 1rem; padding: 1.5rem; }
+  .brand { color: #6d28d9; font-weight: 700; font-size: 0.875rem; letter-spacing: 0.02em; margin: 0 0 0.75rem; }
+  h1 { font-size: 1.25rem; line-height: 1.3; margin: 0 0 1rem; }
+  p { margin: 0 0 0.875rem; }
+  .versions { background: #f5f3ff; border-radius: 0.5rem; padding: 0.75rem 1rem; font-size: 0.9375rem; }
+  .note { color: #4b5563; font-size: 0.875rem; margin: 0; }
+</style>
+</head>
+<body>
+<main>
+  <div class="card">
+    <p class="brand">Locker Vault</p>
+    <h1 id="title">This phone's WebView is too old</h1>
+    <p id="need">Locker Vault needs Android System WebView {min} or later.</p>
+    <p class="versions" id="have">This phone has version {have}.</p>
+    <p id="fix">Update Android System WebView from Google Play, then take the phone offline again. Or install Locker Vault on a more recent phone.</p>
+    <p class="note" id="safe">Nothing on this phone was changed.</p>
+  </div>
+</main>
+<script>
+(function () {
+  var MIN = 91;
+  var T = {
+    en: ["This phone's WebView is too old", "Locker Vault needs Android System WebView {min} or later.", "This phone has version {have}.", "Update Android System WebView from Google Play, then take the phone offline again. Or install Locker Vault on a more recent phone.", "Nothing on this phone was changed."],
+    fr: ["La WebView de ce téléphone est trop ancienne", "Locker Vault a besoin d'Android System WebView {min} ou plus récente.", "Ce téléphone a la version {have}.", "Mettez à jour Android System WebView depuis Google Play, puis remettez le téléphone hors ligne. Ou installez Locker Vault sur un téléphone plus récent.", "Rien n'a été modifié sur ce téléphone."],
+    de: ["Die WebView dieses Telefons ist zu alt", "Locker Vault benötigt Android System WebView {min} oder neuer.", "Dieses Telefon hat Version {have}.", "Aktualisieren Sie Android System WebView über Google Play und nehmen Sie das Telefon danach wieder vom Netz. Oder installieren Sie Locker Vault auf einem neueren Telefon.", "Auf diesem Telefon wurde nichts verändert."],
+    es: ["La WebView de este teléfono es demasiado antigua", "Locker Vault necesita Android System WebView {min} o posterior.", "Este teléfono tiene la versión {have}.", "Actualiza Android System WebView desde Google Play y vuelve a desconectar el teléfono. O instala Locker Vault en un teléfono más reciente.", "No se ha modificado nada en este teléfono."],
+    it: ["La WebView di questo telefono è troppo vecchia", "Locker Vault richiede Android System WebView {min} o successiva.", "Questo telefono ha la versione {have}.", "Aggiorna Android System WebView da Google Play, poi rimetti il telefono offline. Oppure installa Locker Vault su un telefono più recente.", "Su questo telefono non è stato modificato nulla."],
+    pt: ["A WebView deste telefone é antiga demais", "O Locker Vault precisa do Android System WebView {min} ou mais recente.", "Este telefone tem a versão {have}.", "Atualize o Android System WebView pelo Google Play e depois deixe o telefone offline de novo. Ou instale o Locker Vault num telefone mais recente.", "Nada foi alterado neste telefone."],
+    ru: ["WebView на этом телефоне слишком старая", "Locker Vault требуется Android System WebView {min} или новее.", "На этом телефоне версия {have}.", "Обновите Android System WebView через Google Play, затем снова отключите телефон от сети. Или установите Locker Vault на более новый телефон.", "На этом телефоне ничего не изменено."],
+    ar: ["إصدار WebView على هذا الهاتف قديم جدًا", "يحتاج Locker Vault إلى Android System WebView بالإصدار {min} أو أحدث.", "الإصدار الموجود على هذا الهاتف هو {have}.", "حدّث Android System WebView من Google Play، ثم افصل الهاتف عن الشبكة مجددًا. أو ثبّت Locker Vault على هاتف أحدث.", "لم يتغير أي شيء على هذا الهاتف."],
+    he: ["גרסת ה-WebView בטלפון הזה ישנה מדי", "Locker Vault דורש Android System WebView בגרסה {min} ומעלה.", "בטלפון הזה מותקנת גרסה {have}.", "עדכנו את Android System WebView מ-Google Play, ואז נתקו שוב את הטלפון מהרשת. או התקינו את Locker Vault בטלפון חדש יותר.", "שום דבר בטלפון הזה לא שונה."],
+    hi: ["इस फ़ोन का WebView बहुत पुराना है", "Locker Vault को Android System WebView {min} या उससे नया चाहिए।", "इस फ़ोन में संस्करण {have} है।", "Google Play से Android System WebView अपडेट करें, फिर फ़ोन को दोबारा ऑफ़लाइन कर दें। या Locker Vault को किसी नए फ़ोन पर इंस्टॉल करें।", "इस फ़ोन पर कुछ भी नहीं बदला गया।"],
+    id: ["WebView di ponsel ini terlalu lama", "Locker Vault memerlukan Android System WebView {min} atau yang lebih baru.", "Ponsel ini memiliki versi {have}.", "Perbarui Android System WebView dari Google Play, lalu buat ponsel offline lagi. Atau pasang Locker Vault di ponsel yang lebih baru.", "Tidak ada yang diubah di ponsel ini."],
+    tr: ["Bu telefonun WebView sürümü çok eski", "Locker Vault, Android System WebView {min} veya daha yenisini gerektirir.", "Bu telefonda {have} sürümü var.", "Android System WebView'ü Google Play'den güncelleyin, ardından telefonu yeniden çevrimdışı yapın. Ya da Locker Vault'u daha yeni bir telefona yükleyin.", "Bu telefonda hiçbir şey değiştirilmedi."],
+    vi: ["WebView trên điện thoại này quá cũ", "Locker Vault cần Android System WebView {min} trở lên.", "Điện thoại này có phiên bản {have}.", "Hãy cập nhật Android System WebView từ Google Play, rồi đưa điện thoại về chế độ ngoại tuyến. Hoặc cài Locker Vault trên một điện thoại mới hơn.", "Không có gì trên điện thoại này bị thay đổi."],
+    zh: ["此手机的 WebView 版本过旧", "Locker Vault 需要 Android System WebView {min} 或更高版本。", "此手机的版本为 {have}。", "请通过 Google Play 更新 Android System WebView，然后让手机重新离线。或者在较新的手机上安装 Locker Vault。", "此手机上的任何内容都未被更改。"],
+    ja: ["この端末の WebView は古すぎます", "Locker Vault には Android System WebView {min} 以降が必要です。", "この端末のバージョンは {have} です。", "Google Play で Android System WebView を更新し、その後もう一度端末をオフラインにしてください。または、より新しい端末に Locker Vault をインストールしてください。", "この端末では何も変更されていません。"],
+    ko: ["이 휴대폰의 WebView가 너무 오래되었습니다", "Locker Vault에는 Android System WebView {min} 이상이 필요합니다.", "이 휴대폰의 버전은 {have}입니다.", "Google Play에서 Android System WebView를 업데이트한 다음 휴대폰을 다시 오프라인으로 전환하세요. 또는 더 최신 휴대폰에 Locker Vault를 설치하세요.", "이 휴대폰에서는 아무것도 변경되지 않았습니다."]
+  };
+  // Capacitor on iOS loads the same page when the app itself fails to load:
+  // there the WebView is the system's, so only the generic message applies.
+  var G = {
+    en: ["Locker Vault could not start", "Close the app and open it again."],
+    fr: ["Locker Vault n'a pas pu démarrer", "Fermez l'application et rouvrez-la."],
+    de: ["Locker Vault konnte nicht starten", "Schließen Sie die App und öffnen Sie sie erneut."],
+    es: ["Locker Vault no ha podido iniciarse", "Cierra la aplicación y vuelve a abrirla."],
+    it: ["Locker Vault non è riuscito ad avviarsi", "Chiudi l'app e riaprila."],
+    pt: ["O Locker Vault não conseguiu iniciar", "Feche o aplicativo e abra-o novamente."],
+    ru: ["Не удалось запустить Locker Vault", "Закройте приложение и откройте его снова."],
+    ar: ["تعذّر تشغيل Locker Vault", "أغلق التطبيق ثم افتحه من جديد."],
+    he: ["לא ניתן היה להפעיל את Locker Vault", "סגרו את האפליקציה ופתחו אותה מחדש."],
+    hi: ["Locker Vault शुरू नहीं हो सका", "ऐप बंद करें और उसे फिर से खोलें।"],
+    id: ["Locker Vault tidak dapat dimulai", "Tutup aplikasi lalu buka kembali."],
+    tr: ["Locker Vault başlatılamadı", "Uygulamayı kapatıp yeniden açın."],
+    vi: ["Không thể khởi động Locker Vault", "Hãy đóng ứng dụng rồi mở lại."],
+    zh: ["Locker Vault 无法启动", "请关闭应用后重新打开。"],
+    ja: ["Locker Vault を起動できませんでした", "アプリを閉じて、もう一度開いてください。"],
+    ko: ["Locker Vault를 시작할 수 없습니다", "앱을 닫았다가 다시 여세요."]
+  };
+  var ids = ['title', 'need', 'have', 'fix', 'safe'];
+  var lang = String((navigator.languages && navigator.languages[0]) || navigator.language || 'en').toLowerCase().slice(0, 2);
+  var android = /Android/.test(navigator.userAgent);
+  var t = T[lang] || T.en;
+  var m = /Chrome\/(\d+)/.exec(navigator.userAgent);
+  var have = m ? m[1] : '?';
+  for (var i = 0; i < ids.length; i++) {
+    var el = document.getElementById(ids[i]);
+    if (android) {
+      el.textContent = t[i].replace('{min}', String(MIN)).replace('{have}', have);
+    } else if (i < 2) {
+      el.textContent = (G[lang] || G.en)[i];
+    } else {
+      el.parentNode.removeChild(el);
+    }
+  }
+  document.documentElement.lang = T[lang] ? lang : 'en';
+  if (lang === 'ar' || lang === 'he') document.documentElement.dir = 'rtl';
+})();
+</script>
+</body>
+</html>
